@@ -21,6 +21,25 @@ Git必须知道当前版本是哪个版本，在Git中，用HEAD表示当前版�
 $git reset --hard HEAD^     回退到上一个版本
 $git reset --hard HEAD^^    回退到上上一个版本
 
+
+7.本地先删除文件
+提交删除真的要删除了  git rm test.txt
+后悔了将删除的找回来  git checkout -- test.txt
+
+
+查看分支：git branch
+
+创建分支：git branch <name>
+
+切换分支：git checkout <name>
+
+创建+切换分支：git checkout -b <name>
+
+合并某分支到当前分支：git merge <name>
+
+删除分支：git branch -d <name>
+
+
 git流程
 工作区-->add之后(暂存区)-->commit之后(版本库)
 
