@@ -6,6 +6,7 @@
 
 - 数据库迁移 php artisan migrate
 - 数据库回滚 php artisan migrate:rollback
+- 数据库重置 php artisan migrate:refresh        //refresh 的作用是重置数据库并重新运行所有迁移
 
 
 约定优于配置』（convention over configuration），也称作按约定编程，这是一种软件设计范式，旨在减少软件开发人员需做决定的数量，获得简单的好处，而又不失灵活性。
