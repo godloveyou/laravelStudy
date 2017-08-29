@@ -17,3 +17,7 @@ Route::get('/help', 'StaticPagesController@help')->name('help');
 Route::get('/about', 'StaticPagesController@about')->name('about');
 Route::get('/signup', 'UsersController@register')->name('signup');
 Route::resource('users','UsersController');
+
+Route::get('/login', 'SessionController@toLogin')->name('login');
+Route::post('/login', 'SessionController@login')->name('login');
+Route::get('/logout', 'SessionController@destory')->name('logout');
