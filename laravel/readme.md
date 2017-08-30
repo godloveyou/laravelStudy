@@ -17,3 +17,14 @@
 ##多语言处理
 https://fsdhub.com/books/laravel-essential-training-5.5/587/registration-failed-error-message
 使用扩展包laravel-lang https://github.com/overtrue/laravel-lang/blob/master/README_CN.md
+
+#通过路由传参与控制器进行交互；
+- 使用 PATCH 动作来更新用户信息；
+- 使用 Auth 中间件来过滤请求；
+- 通过授权策略来授权用户进行编辑资料和删除用户的操作；
+- 通过 intended 方法来提供更加友好的重定向方式；
+- 使用数据填充的方式来生成假数据；
+- Faker 扩展包的基本使用；
+- 借助 Laravel 默认集成的分页功能为用户列表进行分页；
+- 通过授权给管理员来删除用户；
+- 对一个资源进行删除；

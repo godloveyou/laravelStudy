@@ -10,12 +10,27 @@ class UsersController extends Controller
     public function __construct()
     {
       $this->middleware('auth',[
-        'except'=>['show','store','register']
+        'except'=>['show','store','register','index']
       ]);
 
       $this->middleware('guest', [
            'only' => ['register']
        ]);
+    }
+
+    public function index()
+    {
+      //$users = User::all();
+      $users = User::paginate(2);
+      return view('users.index',compact('users'));
+    }
+
+    public function destroy(User $user)
+    {
+       $this->authorize('destroy', $user);
+       $user->delete();
+       session()->flash('success', '成功删除用户！');
+       return back();
     }
 
     public function update(User $user,Request $request)
