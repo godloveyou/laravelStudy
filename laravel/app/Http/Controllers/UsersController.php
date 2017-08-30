@@ -7,6 +7,41 @@ use App\Models\User;
 use Auth;
 class UsersController extends Controller
 {
+    public function __construct()
+    {
+      $this->middleware('auth',[
+        'except'=>['show','store','register']
+      ]);
+
+      $this->middleware('guest', [
+           'only' => ['register']
+       ]);
+    }
+
+    public function update(User $user,Request $request)
+    {
+      //授权检查  在 Laravel 中可以使用 授权策略 (Policy) 来对用户的操作权限进行验证，在用户未经授权进行操作时将返回 403 禁止访问的异常。
+      //https://fsdhub.com/books/laravel-essential-training-5.5/599/permissions-system
+      $this->authorize('update', $user);
+
+      $this->validate($request,[
+        'name'=>'required|max:50',
+        'password'=>'nullable|confirmed|min:6'
+      ]);
+      $data = [];
+      $data['name'] = $request->name;
+      if($request->password){
+        $data['password'] = bcrypt($request->password);
+      }
+      $user->update($data);
+      session()->flash('success','更新成功');
+      return redirect()->route('users.show',$user->id);
+
+    }
+    public function edit(User $user)
+    {
+      return view('users.edit',compact('user'));
+    }
 
     public function register()
     {
