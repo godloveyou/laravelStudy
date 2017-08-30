@@ -19,12 +19,24 @@ https://fsdhub.com/books/laravel-essential-training-5.5/587/registration-failed-
 使用扩展包laravel-lang https://github.com/overtrue/laravel-lang/blob/master/README_CN.md
 
 #通过路由传参与控制器进行交互；
-- 使用 PATCH 动作来更新用户信息；
-- 使用 Auth 中间件来过滤请求；
-- 通过授权策略来授权用户进行编辑资料和删除用户的操作；
-- 通过 intended 方法来提供更加友好的重定向方式；
-- 使用数据填充的方式来生成假数据；
-- Faker 扩展包的基本使用；
-- 借助 Laravel 默认集成的分页功能为用户列表进行分页；
-- 通过授权给管理员来删除用户；
-- 对一个资源进行删除；
+- 使用 PATCH 动作来更新用户信息
+- 使用 Auth 中间件来过滤请求
+- 通过授权策略来授权用户进行编辑资料和删除用户的操作
+- 通过 intended 方法来提供更加友好的重定向方式
+- 使用数据填充的方式来生成假数据
+- Faker 扩展包的基本使用
+- 借助 Laravel 默认集成的分页功能为用户列表进行分页
+- 通过授权给管理员来删除用户
+- 对一个资源进行删除
+
+##资源路由
+resource 方法让我们少写了很多代码，且严格按照了 RESTful 架构对路由进行设计。
+生成的资源路由列表信息如下所示：
+HTTP 	请求			         URL		         动作	              作用
+GET	  /users			       UsersController@index	 显示所有用户列表的页面
+GET	  /users/{user}		   UsersController@show	   显示用户个人信息的页面
+GET	  /users/create		   UsersController@create	 创建用户的页面
+POST	/users			       UsersController@store	 创建用户
+GET	  /users/{user}/edit UsersController@edit	   编辑用户个人资料的页面
+PATCH	/users/{user}		   UsersController@update	 更新用户
+DELETE	/users/{user}		 UsersController@destroy 删除用户

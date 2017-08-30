@@ -20,7 +20,7 @@ class SessionController extends Controller
   {
     Auth::logout();
     session()->flash('success', '您已经退出登录');
-    return redirect('toLogin');
+    return redirect('login');
   }
 
     //

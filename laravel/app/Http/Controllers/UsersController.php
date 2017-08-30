@@ -10,7 +10,7 @@ class UsersController extends Controller
     public function __construct()
     {
       $this->middleware('auth',[
-        'except'=>['show','store','register','index']
+        'except'=>['show','store','create','index','destroy']
       ]);
 
       $this->middleware('guest', [
@@ -53,12 +53,13 @@ class UsersController extends Controller
       return redirect()->route('users.show',$user->id);
 
     }
+
     public function edit(User $user)
     {
       return view('users.edit',compact('user'));
     }
 
-    public function register()
+    public function create()
     {
       return view('users.create');
     }
