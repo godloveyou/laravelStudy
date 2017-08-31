@@ -1,3 +1,15 @@
+##Atom快捷键
+基本操作
+cmd-shift-D 复制当前行到下一行
+
+删除和剪切
+ctrl-shift-K 删除当前行
+
+查找和替换
+cmd-F 在buffer中查找
+cmd-shift-f 在整个工程中查找
+
+
 ##   cmd
 - 生成控制器 php artisan make:controller UserController
 - 生成模型   php artisan make:model User (此种方式生成的模型放置在app下)

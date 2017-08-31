@@ -53,13 +53,10 @@ class SessionController extends Controller
             session()->flash('warning', '你的账号未激活，请检查邮箱中的注册邮件进行激活。');
             return redirect('/');
         }
-
-
       }else{
         session()->flash('danger',"登录失败[用户名密码错]");
         return redirect()->back();
       }
-
     }
 
 
