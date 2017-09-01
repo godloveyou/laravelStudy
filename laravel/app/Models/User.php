@@ -10,6 +10,7 @@ class User extends Authenticatable
     //开启字段白名单 否则插入数据异常
     protected $fillable = ['name', 'email', 'password'];
 
+
     public function articles()
     {
         return $this->hasMany('App\Models\Article');
@@ -35,5 +36,10 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new ResetPassword($token));
+    }
+
+    public function feeds()
+    {
+        return $this->articles()->orderBy('created_at','desc');
     }
 }

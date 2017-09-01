@@ -3,26 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use Auth;
 class StaticPagesController extends Controller
 {
     //
-    public function home($value='')
+    public function home($value = '')
     {
-      # code...
-      return view('staticPages.home');
+
+        $feed_items = [];
+        if (Auth::check()) {
+            $feed_items = Auth::user()->feeds()->paginate(5);
+        }
+        return view('staticPages.home', compact('feed_items'));
     }
 
-    public function about($value='')
+    public function about($value = '')
     {
-      # code...
-      return view('staticPages.about');
+        # code...
+        return view('staticPages.about');
     }
 
-    public function help($value='')
+    public function help($value = '')
     {
-      # code...
-      return view('staticPages.help');
+        # code...
+        return view('staticPages.help');
     }
 
 

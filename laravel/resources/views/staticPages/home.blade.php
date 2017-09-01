@@ -1,6 +1,21 @@
 @extends('layouts.default')
 @section('title','首页')
 @section('content')
+
+  @if (Auth::check())
+    <div class="row" style="margin-top: 30px">
+      <div class="col-md-8">
+        <section class="status_form">
+          @include('shared._create_article_form')
+        </section>
+
+        <h3>微博列表</h3>
+        @include('shared._feed')
+      </div>
+
+    </div>
+  @else
+
   <div class="jumbotron">
     <h1>Hello Laravel</h1>
     <p class="lead">
@@ -13,4 +28,5 @@
       <a class="btn btn-lg btn-success" href="{{route('signup')}}" role="button">现在注册</a>
     </p>
   </div>
+  @endif
 @stop

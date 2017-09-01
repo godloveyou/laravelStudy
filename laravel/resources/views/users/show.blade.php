@@ -15,14 +15,10 @@
 
   <div class="row">
     @foreach ($articles as $article)
-      <div class="panel panel-primary">
-        <div class="panel-heading">{{$user->name}}</div>
-
-        <div class="panel-body">
-          {{$article->content}}
-        </div>
-        <div class="panel-footer">  {{ $article->created_at->diffForHumans() }}</div>
-      </div>
+          @include('articles._article', ['user' => $article->user])
     @endforeach
+      {!! $articles->render() !!}
   </div>
+
+
 @stop

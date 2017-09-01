@@ -33,19 +33,39 @@ $ php artisan make:migration create_aiticles_table --create="articles"
 -- 2.创建模型
 $ php artisan make:model Models/User
 
-
 -- 3.创建模型工厂 database/factory包下
-
-
 -- 4.创建seeder
 $ php artisan make:seeder UsersTableSeeder
-
-
 -- 5.在database.seeder的run方法中加入需要填充的表
-
-
 -- 6.开始填充数据
 $ php artisan db:seed --class=UsersTableSeeder
+
+##授权策略的使用
+-- 1.生成授权策略 
+$ php artisan make:policy ArticlesPolicy
+-- 2.在app\Policies下找到相应的策略类,编写具体的方法
+如:
+  /**
+     * @param User $currentUser
+     * @param Article $article
+     * @return bool
+     * 微博删除策略：必须是微博发布者才能购删除自己微博
+     */
+    public function destory(User $currentUser, Article $article)
+    {
+        return $currentUser->id === $article->user_id;
+    }
+ 
+-- 3.降策略加入到AuthServiceProvider中
+ protected $policies = [
+        'App\Model' => 'App\Policies\ModelPolicy',
+        \App\Models\User::class  => \App\Policies\UserPolicy::class,
+        \App\Models\Article::class  => \App\Policies\ArticlesPolicy::class//配置自定义的策略
+    ];
+
+-- 4.在controller或者页面中进行验证授权.
+在controller中使用方法
+$this->authorize('destory',$article);
 
 
 
