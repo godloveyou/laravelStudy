@@ -26,6 +26,30 @@ cmd-shift-f 在整个工程中查找
 『约定优于配置』能极大提高开发效率，并且也更有利于团队协作。Laravel 项目中大量的使用了『约定优于配置』这种设计范式，这也是 Laravel 的另一个可爱之处。
 
 
+##创建模型过程
+-- 1.创建表,同时更新相应的内容
+$ php artisan make:migration create_aiticles_table --create="articles"
+
+-- 2.创建模型
+$ php artisan make:model Models/User
+
+
+-- 3.创建模型工厂 database/factory包下
+
+
+-- 4.创建seeder
+$ php artisan make:seeder UsersTableSeeder
+
+
+-- 5.在database.seeder的run方法中加入需要填充的表
+
+
+-- 6.开始填充数据
+$ php artisan db:seed --class=UsersTableSeeder
+
+
+
+
 ##多语言处理
 https://fsdhub.com/books/laravel-essential-training-5.5/587/registration-failed-error-message
 使用扩展包laravel-lang https://github.com/overtrue/laravel-lang/blob/master/README_CN.md

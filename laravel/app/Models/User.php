@@ -5,11 +5,15 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword;
-
 class User extends Authenticatable
 {
     //开启字段白名单 否则插入数据异常
     protected $fillable = ['name', 'email', 'password'];
+
+    public function articles()
+    {
+        return $this->hasMany('App\Models\Article');
+    }
 
     //用户头像
     public function gravatar($size = 100)

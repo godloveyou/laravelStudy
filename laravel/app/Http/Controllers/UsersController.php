@@ -20,6 +20,8 @@ class UsersController extends Controller
         ]);
     }
 
+
+
     //用户列表
     public function index()
     {
@@ -73,7 +75,11 @@ class UsersController extends Controller
 
     public function show(User $user)
     {
-        return view('users.show', compact('user'));
+        //return view('users.show', compact('user'));
+        $articles = $user->articles()
+            ->orderBy('created_at','desc')
+            ->paginate(30);
+        return view('users.show',compact('user','articles'));
     }
 
     //发送激活邮件
