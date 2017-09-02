@@ -1,4 +1,13 @@
 ##Atom快捷键
+Mac下如何安装本项目
+1.克隆项目到本地，同时配置本地目录与虚拟机中目录之间的同步,配置在Homestead/Homestead.yaml中进行
+2.拷贝一份.env文件,同时使用 php artisan key:generate为项目生成appkey
+3.更改.env文件中的数据库连接及其他相关配置
+4.安装包依赖 composer install
+5.迁移数据库
+进入homestead目录 使用 vagrant ssh连接到虚拟机中 使用php artisan migrate进行数据库迁移工作
+
+
 基本操作
 cmd-shift-D 复制当前行到下一行
 
@@ -41,7 +50,7 @@ $ php artisan make:seeder UsersTableSeeder
 $ php artisan db:seed --class=UsersTableSeeder
 
 ##授权策略的使用
--- 1.生成授权策略 
+-- 1.生成授权策略
 $ php artisan make:policy ArticlesPolicy
 -- 2.在app\Policies下找到相应的策略类,编写具体的方法
 如:
@@ -55,7 +64,7 @@ $ php artisan make:policy ArticlesPolicy
     {
         return $currentUser->id === $article->user_id;
     }
- 
+
 -- 3.降策略加入到AuthServiceProvider中
  protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
