@@ -5,12 +5,50 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword;
+
 class User extends Authenticatable
 {
     //开启字段白名单 否则插入数据异常
     protected $fillable = ['name', 'email', 'password'];
 
+    //关注方法
+    public function follow($user_ids)
+    {
+        if (!is_array($user_ids)) {
+            $user_ids = compact('user_ids');
+        }
+        $this->followings()->sync($user_ids, false);
+    }
 
+    //取消关注
+    public function unfollow($user_ids)
+    {
+        if (!is_array($user_ids)) {
+            $user_ids = compact('user_ids');
+        }
+        $this->followings()->detach($user_ids);
+    }
+
+
+    //获取用户所有粉丝
+    public function followers()
+    {
+        return $this->belongsToMany('App\Models\User', 'followers', 'user_id', 'follower_id');
+    }
+
+    //获取用户关注的人
+    public function followings()
+    {
+        return $this->belongsToMany('App\Models\User', 'followers', 'follower_id', 'user_id');
+    }
+
+    //判断登录用户是否关注了用户b
+    public function isFollow($user_id)
+    {
+        return $this->followings()->contains($user_id);
+    }
+
+    //通过该方法构建用户与微博1对多的关系
     public function articles()
     {
         return $this->hasMany('App\Models\Article');
@@ -40,6 +78,6 @@ class User extends Authenticatable
 
     public function feeds()
     {
-        return $this->articles()->orderBy('created_at','desc');
+        return $this->articles()->orderBy('created_at', 'desc');
     }
 }

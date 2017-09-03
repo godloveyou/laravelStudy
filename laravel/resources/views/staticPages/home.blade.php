@@ -3,11 +3,15 @@
 @section('content')
 
   @if (Auth::check())
-    <div class="row" style="margin-top: 30px">
+    <div class="row" style="margin-top: 100px">
       <div class="col-md-8">
         <section class="status_form">
           @include('shared._create_article_form')
         </section>
+
+        <section class="status_form">
+         @include('shared._status',['user' => Auth::user()])
+       </section>
 
         <h3>微博列表</h3>
         @include('shared._feed')

@@ -8,12 +8,17 @@
         <section class="user_info">
           @include('shared._userinfo', ['user' => $user])
         </section>
+
+        @if (Auth::check())
+          @include('users._follow_form')
+        @endif
       </div>
     </div>
   </div>
 </div>
 
   <div class="row">
+
     @foreach ($articles as $article)
           @include('articles._article', ['user' => $article->user])
     @endforeach

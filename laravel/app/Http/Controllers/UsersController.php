@@ -20,7 +20,21 @@ class UsersController extends Controller
         ]);
     }
 
+    //关注的人
+    public function followings(User $user)
+    {
+      $users = $user->followings()->paginate(30);
+      $title = '关注的人';
+      return view('users.show_follow',compact('users','title'));
+    }
 
+    //粉丝
+    public function followers(User $user)
+    {
+      $users = $user->followers()->paginate(30);
+      $title = '粉丝';
+      return view('users.show_follow',compact('users','title'));
+    }
 
     //用户列表
     public function index()
@@ -58,7 +72,6 @@ class UsersController extends Controller
         $user->update($data);
         session()->flash('success', '更新成功');
         return redirect()->route('users.show', $user->id);
-
     }
 
 
@@ -77,9 +90,9 @@ class UsersController extends Controller
     {
         //return view('users.show', compact('user'));
         $articles = $user->articles()
-            ->orderBy('created_at','desc')
+            ->orderBy('created_at', 'desc')
             ->paginate(5);
-        return view('users.show',compact('user','articles'));
+        return view('users.show', compact('user', 'articles'));
     }
 
     //发送激活邮件
@@ -133,6 +146,4 @@ class UsersController extends Controller
         session()->flash('success', '恭喜你，激活成功！');
         return redirect()->route('users.show', [$user]);
     }
-
-
 }

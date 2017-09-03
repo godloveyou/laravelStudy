@@ -10,14 +10,12 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-
 Route::get('/', 'StaticPagesController@home')->name('home');;
 Route::get('/help', 'StaticPagesController@help')->name('help');
 Route::get('/about', 'StaticPagesController@about')->name('about');
 Route::get('/signup', 'UsersController@create')->name('signup');
 Route::get('signup/confirm/{token}', 'UsersController@confirmEmail')->name('confirm_email'); //激活邮件处理
-Route::resource('users','UsersController');
+Route::resource('users', 'UsersController');
 
 Route::get('/login', 'SessionController@toLogin')->name('login');
 Route::post('/login', 'SessionController@login')->name('login');
@@ -29,4 +27,10 @@ Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm
 Route::post('password/reset', 'Auth\ResetPasswordController@reset')->name('password.update');
 
 
-Route::resource('articles','ArticlesController',['only' => ['store', 'destroy']]);
+Route::resource('articles', 'ArticlesController', ['only' => ['store', 'destroy']]);
+
+//关注功能路由
+Route::get('/users/{user}/followings', 'UsersController@followings')->name('users.followings');
+Route::get('/users/{user}/followers', 'UsersController@followers')->name('users.followers');
+Route::post('/users/followers/{user}', 'FollowersController@store')->name('followers.store');
+Route::delete('/users/followers/{user}', 'FollowersController@destroy')->name('followers.destroy');
