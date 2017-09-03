@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\ResetPassword;
-
+use Auth;
 class User extends Authenticatable
 {
     //开启字段白名单 否则插入数据异常
@@ -76,8 +76,14 @@ class User extends Authenticatable
         $this->notify(new ResetPassword($token));
     }
 
+    //查询关注者的微博动态
     public function feeds()
     {
-        return $this->articles()->orderBy('created_at', 'desc');
+        $user_ids = Auth::user()->followings->pluck('id')->toArray();
+        //将登录者的id也加入进来，否则就只显示关注者的微博，而没有自己的
+        array_push($user_ids, Auth::user()->id);
+        return Article::whereIn('user_id',$user_ids)
+                ->with('user')
+                ->orderBy('created_at','desc');
     }
 }
