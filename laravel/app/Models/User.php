@@ -45,7 +45,7 @@ class User extends Authenticatable
     //判断登录用户是否关注了用户b
     public function isFollow($user_id)
     {
-        return $this->followings()->contains($user_id);
+        return $this->followings->contains($user_id);
     }
 
     //通过该方法构建用户与微博1对多的关系
